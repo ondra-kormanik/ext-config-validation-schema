@@ -1,0 +1,288 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "required": [
+    "common",
+    "formats",
+    "modules",
+    "zonesAndPageTypes",
+    "adSlots"
+  ],
+  "properties": {
+    "common": {
+      "type": "object",
+      "required": [
+        "dfpAppNetwork",
+        "dfpiOSAppName",
+        "dfpAndroidAppName",
+        "updateIntervalMs"
+      ],
+      "properties": {
+        "dfpAppNetwork": {
+          "type": "string"
+        },
+        "dfpiOSAppName": {
+          "type": "string"
+        },
+        "dfpAndroidAppName": {
+          "type": "string"
+        },
+        "updateIntervalMs": {
+          "type": "number"
+        },
+        "rtaAuction": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "formats": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "object",
+          "required": [
+            "active",
+            "availableOn",
+            "dfpSizes"
+          ],
+          "properties": {
+            "active": {
+              "type": "boolean"
+            },
+            "availableOn": {
+              "type": "array",
+              "uniqueItems": true,
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "dfpSizes": {
+              "type": "object",
+              "required": [
+                "androidAdSizes"
+              ],
+              "properties": {
+                "androidAdSizes": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "additionalItems": true,
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      }
+                    ]
+                  }
+                },
+                "customAdSizes": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "additionalItems": true,
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "w",
+                          "h"
+                        ],
+                        "properties": {
+                          "w": {
+                            "type": "number"
+                          },
+                          "h": {
+                            "type": "number"
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "modules": {
+      "type": "array",
+      "uniqueItems": true,
+      "additionalItems": true,
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "PREBID"
+            ],
+            "properties": {
+              "PREBID": {
+                "type": "object",
+                "required": [
+                  "yieldloveAccountId"
+                ],
+                "properties": {
+                  "yieldloveAccountId": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true
+              }
+            },
+            "additionalProperties": true
+          },
+          {
+            "type": "object",
+            "required": [
+              "SOURCEPOINT"
+            ],
+            "properties": {
+              "SOURCEPOINT": {
+                "type": "object",
+                "required": [
+                  "sourcepointAccountId",
+                  "active",
+                  "propertyId",
+                  "propertyName",
+                  "privacyManagerId"
+                ],
+                "properties": {
+                  "sourcepointAccountId": {
+                    "type": "string"
+                  },
+                  "active": {
+                    "type": "boolean"
+                  },
+                  "propertyId": {
+                    "type": "string"
+                  },
+                  "propertyName": {
+                    "type": "string"
+                  },
+                  "privacyManagerId": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true
+              }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    },
+    "zonesAndPageTypes": {
+      "type": "object",
+      "required": [
+        "level1",
+        "level2",
+        "pageType"
+      ],
+      "properties": {
+        "level1": {
+          "type": "object",
+          "patternProperties": {
+            ".*": {
+              "type": "object",
+              "properties": {
+                "keyValues": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "level2": {
+          "type": "object",
+          "patternProperties": {
+            ".*": {
+              "type": "object",
+              "properties": {
+                "keyValues": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "pageType": {
+          "type": "object",
+          "patternProperties": {
+            ".*": {
+              "type": "object",
+              "properties": {
+                "keyValues": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      },
+      "additionalProperties": true
+    },
+    "adSlots": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "object",
+          "required": [
+            "prebidConfigId"
+          ],
+          "properties": {
+            "prebidConfigId": {
+              "type": "string"
+            },
+            "keyValues": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "customAdSizes": {
+              "type": "array",
+              "uniqueItems": true,
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "w",
+                      "h"
+                    ],
+                    "properties": {
+                      "w": {
+                        "type": "number"
+                      },
+                      "h": {
+                        "type": "number"
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                ]
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
